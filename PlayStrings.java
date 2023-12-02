@@ -1,6 +1,8 @@
 
 
 
+ //int foo = Integer.parseInt(myString); to string to int
+//charAt(0) to take first char at string;
 
 public class PlayStrings {
     
