@@ -8,19 +8,10 @@ public class Main {
         PlayStrings ps = new PlayStrings();
         String[] computerDeck = new String[10];
         String[] playerDeck = new String[10];
-        //0 0 mavi 0 1 2 3 4 5 6 7 8 9
-        //1 0 sarı 0
-        //2 0 kırmızı 0
-        //3 0 yesil 0
+
             String[][] gameDeck = new String[4][10];
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j <10 ; j++) {
-                    if(i==0) gameDeck[0][j] = "B"+(j+1);
-                    if(i==1) gameDeck[1][j] = "Y"+(j+1);
-                    if(i==2) gameDeck[2][j] = "R"+(j+1);
-                    if(i==3) gameDeck[3][j] = "G"+(j+1);
-                }
-            }
+            gameDeck = ps.gamedeckCreator(gameDeck);
+            
             String[] shuffledCards = new String[40];
             for (int i = 0; i < 40; i++) {
             
@@ -43,8 +34,14 @@ public class Main {
                 computerDeck[i] = shuffledCards[i];
                 shuffledCards[i] = "--";
             }
-            
-            
+            playerDeck = ps.secondStepDeckGenerator(playerDeck);
+            computerDeck = ps.secondStepDeckGenerator(computerDeck);
+            playerDeck = ps.thirdStepDeckGenerator(playerDeck);
+            computerDeck = ps.thirdStepDeckGenerator(computerDeck);
+            for (int i = 0; i < 10; i++) {
+                System.out.println(playerDeck[i]);
+        }
+
         while (true) {
             ps.startText();
             int choice = sc.nextInt();
@@ -66,9 +63,7 @@ public class Main {
         
     }
     public static void play(){
-    
-        
-       
+
         PlayStrings ps = new PlayStrings();
         ps.playText();
         
