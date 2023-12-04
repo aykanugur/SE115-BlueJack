@@ -5,45 +5,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
-        PlayStrings ps = new PlayStrings();
-        String[] computerDeck = new String[10];
-        String[] playerDeck = new String[10];
-
-            String[][] gameDeck = new String[4][10];
-            gameDeck = ps.gamedeckCreator(gameDeck);
-            
-            String[] shuffledCards = new String[40];
-            for (int i = 0; i < 40; i++) {
-            
-                int color = random.nextInt(4);
-                int number = random.nextInt(10);
-                
-                while (gameDeck[color][number]=="--") {                    
-                 color = random.nextInt(4);
-                 number = random.nextInt(10);
-                }
-                
-                shuffledCards[i] = gameDeck[color][number];
-                gameDeck[color][number] = "--";  
-        }
-            for (int i = 0; i < 5; i++) {
-                playerDeck[i] = shuffledCards[39-i];
-                shuffledCards[39-i] = "--";
-            }
-            for (int i = 0; i < 5; i++) {
-                computerDeck[i] = shuffledCards[i];
-                shuffledCards[i] = "--";
-            }
-            playerDeck = ps.secondStepDeckGenerator(playerDeck);
-            computerDeck = ps.secondStepDeckGenerator(computerDeck);
-            playerDeck = ps.thirdStepDeckGenerator(playerDeck);
-            computerDeck = ps.thirdStepDeckGenerator(computerDeck);
-            for (int i = 0; i < 10; i++) {
-                System.out.println(playerDeck[i]);
-        }
-
+        GameFunctions gf = new GameFunctions();
+        Cards[] shuffledCards = gf.startCreateCards();
+        Cards[] playerHand =gf.firstStepDeckGenerator(shuffledCards, true);
+        Cards[] computerHand = gf.firstStepDeckGenerator(shuffledCards, false);
+    
         while (true) {
-            ps.startText();
+            gf.startText();
             int choice = sc.nextInt();
             if(choice==1) play();
             if(choice==2)
@@ -64,8 +32,6 @@ public class Main {
     }
     public static void play(){
 
-        PlayStrings ps = new PlayStrings();
-        ps.playText();
         
     }
 }
