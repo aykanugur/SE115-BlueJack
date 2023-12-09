@@ -1,13 +1,14 @@
 
 public class Cards {
-    boolean positive;
+    
     int cardNumber;
     String cardColor;
     boolean x2;
     boolean joker = false;
+    
 
-    public Cards(boolean positive, int cardNumber, String cardColor) {
-        this.positive = positive;
+    public Cards(int cardNumber, String cardColor) {
+        
         this.cardNumber = cardNumber;
         this.cardColor = cardColor;
     }
@@ -18,9 +19,7 @@ public class Cards {
     }
     
 
-    public boolean isPositive() {
-        return positive;
-    }
+    
 
     public int getCardNumber() {
         return cardNumber;
@@ -30,9 +29,7 @@ public class Cards {
         return cardColor;
     }
 
-    public void setPositive(boolean positive) {
-        this.positive = positive;
-    }
+    
 
     public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
@@ -54,16 +51,11 @@ public class Cards {
             
         }else
         {
-        if(positive)
-        {
-        return "+"+cardColor+cardNumber;
-        }else
-        {
-        return "-"+cardColor+cardNumber;
-        }
+         return cardColor+cardNumber;
         }
         
     }
+    
     
     
     
