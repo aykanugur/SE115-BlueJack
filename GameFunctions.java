@@ -1,11 +1,12 @@
-
 import java.util.Random;
 import java.util.Scanner;
 
- //int foo = Integer.parseInt(myString); to string to int
-//charAt(0) to take first char at string;
-
 public class  GameFunctions{
+
+    public GameFunctions(int totalPlayed) {
+        this.totalPlayed = totalPlayed;
+    }
+    
      Random random = new Random();
      Cards[] playerBoardCards = new Cards[9];
      Cards[] computerBoardCards = new Cards[9];
@@ -39,7 +40,7 @@ public class  GameFunctions{
      int computerTotalPlayed = 0;
      int[] computerHandPlayed = new int[4];
      int computerDeckPlayed = 0;
-     int totalPlayed = 5;
+     int totalPlayed;
      int computerTotal;
      Cards[] shuffledCards = new Cards[40];
      Cards[] computerHand = new Cards[4];
@@ -354,15 +355,24 @@ public class  GameFunctions{
     System.out.println("Please enter which row of cards you would like to choose");
     System.out.print("Enter your choice: ");
     choice = sc.nextInt();
-    if(choice<1||4<choice||playerHandPlayed[choice-1]==1)
+    if(choice<1||choice>4)
     {
-    System.out.println("");
-    System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-    System.out.println("");
-    }
+        System.out.println("");
+        System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+        System.out.println("");
+    }else
     {
-    break;
+        if(playerHandPlayed[choice-1]==1)
+        {
+            System.out.println("");
+            System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+            System.out.println("");
+        }else
+        {
+            break;
+        }
     }
+   
         }
     System.out.println("");
     System.out.println("You picked card from your hand");
@@ -405,21 +415,30 @@ public class  GameFunctions{
     }
     public void pickAgain()
     {
-        int choice;
-        while (true) {            
+    int choice;
+    while (true) {            
     System.out.println("");
     System.out.println("Please enter which row of cards you would like to choose");
     System.out.print("Enter your choice: ");
     choice = sc.nextInt();
-    if(choice<1||4<choice||playerHandPlayed[choice-1]==1)
+    if(choice<1||choice>4)
     {
-    System.out.println("");
-    System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-    System.out.println("");
-    }
+        System.out.println("");
+        System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+        System.out.println("");
+    }else
     {
-    break;
+        if(playerHandPlayed[choice-1]==1)
+        {
+            System.out.println("");
+            System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+            System.out.println("");
+        }else
+        {
+            break;
+        }
     }
+   
         }
     
     System.out.println("");
@@ -482,15 +501,7 @@ public class  GameFunctions{
   
     }
     if(stand==false) computerstand= false;
-    
-    
-    //elindeki kağıtları test et
-    //for ile tek tek bak elindeki kağıt seni 20 den aşağı çekiyor mu
-    //çekiyorsa kullan ve turu geç
-    //elindeki kağıtlar 20 yi geçiyorsa stand ver.
-        
-    
-    
+  
     }
     
     }

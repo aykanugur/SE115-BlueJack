@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
-        GameFunctions gf = new GameFunctions();
+        GameFunctions gf = new GameFunctions(5);
         Cards[] shuffledCards = gf.startCreateCards();
         Cards[] playerHand =gf.firstStepDeckGenerator(shuffledCards, true);
         Cards[] computerHand = gf.firstStepDeckGenerator(shuffledCards, false);
@@ -16,7 +16,7 @@ public class Main {
             int choice = sc.nextInt();
             if(choice==1) 
             {
-            whoWon = play(shuffledCards, playerHand, computerHand,0,0);
+            whoWon = play(shuffledCards, playerHand, computerHand,0,0,5);
             if(whoWon)
             {
                 System.out.println("User won");
@@ -43,10 +43,10 @@ public class Main {
             
         
     }
-    public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins){
+    public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins,int totalPlayed){
         
         
-        GameFunctions gf = new GameFunctions();
+        GameFunctions gf = new GameFunctions(totalPlayed);
         gf.playText(shuffledCards,playerHand,computerHand);//start of player turn
         
  
@@ -61,6 +61,7 @@ public class Main {
                //player busted  
                  break;
              }
+           totalPlayed= gf.getTotalPlayed();
             }
             if(gf.isComputerstand())
             {
@@ -75,6 +76,7 @@ public class Main {
              }
 
             }
+            totalPlayed= gf.getTotalPlayed();
   
         }
             
@@ -84,7 +86,7 @@ public class Main {
           {
            //tie   
               System.out.println("TIE");
-              return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+              return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
           }else
           {
               if(gf.playerTotal==20)
@@ -99,7 +101,7 @@ public class Main {
                    if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
              
               }else
               {
@@ -114,7 +116,7 @@ public class Main {
                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
              
                   }else
                   {
@@ -131,7 +133,7 @@ public class Main {
                    if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
              
         }else if (player2FullBoard && !player1FullBoard) {
              // Player 2 has a full board and the score is <= 20
@@ -145,7 +147,7 @@ public class Main {
                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
              
         }if (gf.playerTotal <= 20 && gf.computerTotal <= 20) {
             if (20 - gf.playerTotal < 20 - gf.computerTotal) {
@@ -159,7 +161,7 @@ public class Main {
                 if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
             }else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
                   // Player 2 is closest to but not over 20
                   
@@ -172,7 +174,7 @@ public class Main {
                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
             }
         }if(gf.playerTotal>20&&gf.computerTotal<20)
         {
@@ -183,7 +185,7 @@ public class Main {
              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                 if(blueCards==gf.getComputerTotalPlayed()) return false;
                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                 return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+                 return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
                 
             }
         }
@@ -198,10 +200,10 @@ public class Main {
                 if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
         } // No winner according to the rules tie
           System.out.println("TIE");
-          return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+          return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
         
                   }
                   
