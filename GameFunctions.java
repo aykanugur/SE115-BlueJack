@@ -375,11 +375,9 @@ public class  GameFunctions{
              System.out.println("");
               System.out.println("YOU USED X2");
                System.out.println("");
-                playerBoardCards[playerTotalPlayed] = playerBoardCards[(playerTotalPlayed-1)*2];
+                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
                  playerHandPlayed[choice-1] = 1;
-                  totalPlayed++;
-                   playerDeckPlayed++;
-                    playerTotalPlayed++;
+                  
                      playText(shuffledCards, playerHand, computerHand);
                       thirdStep();
          }else
@@ -387,11 +385,9 @@ public class  GameFunctions{
              System.out.println("");
               System.out.println("YOU USED +/-");
                System.out.println("");
-                playerBoardCards[playerTotalPlayed] = playerBoardCards[(playerTotalPlayed-1)*-1];
+                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
                  playerHandPlayed[choice-1] = 1;
-                  totalPlayed++;
-                   playerDeckPlayed++;
-                    playerTotalPlayed++;
+                  
                      playText(shuffledCards, playerHand, computerHand);
                       thirdStep();
           }
@@ -479,11 +475,9 @@ public class  GameFunctions{
              System.out.println("");
               System.out.println("YOU USED X2");
                System.out.println("");
-                playerBoardCards[playerTotalPlayed] = playerBoardCards[(playerTotalPlayed-1)*2];
+                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
                  playerHandPlayed[choice-1] = 1;
-                  totalPlayed++;
-                   playerDeckPlayed++;
-                    playerTotalPlayed++;
+                  
                      playText(shuffledCards, playerHand, computerHand);
                       thirdStep();
          }else
@@ -491,11 +485,11 @@ public class  GameFunctions{
              System.out.println("");
               System.out.println("YOU USED +/-");
                System.out.println("");
-                playerBoardCards[playerTotalPlayed] = playerBoardCards[(playerTotalPlayed-1)*-1];
+                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
                  playerHandPlayed[choice-1] = 1;
-                  totalPlayed++;
-                   playerDeckPlayed++;
-                    playerTotalPlayed++;
+                  
+                   
+                    
                      playText(shuffledCards, playerHand, computerHand);
                       thirdStep();
           }

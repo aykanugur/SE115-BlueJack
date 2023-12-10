@@ -19,28 +19,30 @@ public class Main {
               whoWon = play(shuffledCards, playerHand, computerHand,0,0,5);
             if(whoWon)
             {
+               System.out.println("");
                 System.out.println("User won");
-                choice = 2;
-            }
+                 choice = 2;
+            } 
             else
             {
+             System.out.println("");
               System.out.println("PC won");
-              choice = 2;
-            }
+               choice = 2;
+             }
             }
             
             if(choice==2)
             {
                 System.out.println("");
-                System.out.println("Thx for playing bluejack made by Aykan Ugur");
-                System.out.println("");
-                break;
+                 System.out.println("Thx for playing bluejack made by Aykan Ugur");
+                  System.out.println("");
+                   break;
             }
             else
             {
                 System.out.println("");
-                System.out.println("pls enter valid number for this section");
-                System.out.println("");
+                 System.out.println("pls enter valid number for this section");
+                  System.out.println("");
             }
         }  
     }
@@ -82,15 +84,19 @@ public class Main {
            
           if(gf.playerTotal==20&&gf.computerTotal==20)
           {
-              System.out.println("TIE");
+               System.out.println("");
+                System.out.println("TIE");
+                 System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
           }
           else
           {
               if(gf.playerTotal==20)
               {
-                    playerWins++;
+                   playerWins++;
+                    System.out.println("");
                      System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
+                      System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                    if(playerWins==3) return true;
                      int blueCards = 0;
                    for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
@@ -105,8 +111,10 @@ public class Main {
               {
                   if(gf.computerTotal==20)
                   {
-                      computerWins++;
+                     computerWins++;
+                      System.out.println("");
                        System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND");
+                        System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                         if(computerWins==3) return false;
                          int blueCards = 0;
              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
@@ -123,8 +131,10 @@ public class Main {
                      boolean player2FullBoard = gf.computerTotalPlayed == 9 && gf.getComputerTotal() <= 20;
                    if (player1FullBoard && !player2FullBoard) {
                    // Player 1 has a full board and the score is <= 20
-                     playerWins++;
+                    playerWins++;
+                     System.out.println("");
                       System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
+                       System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                        if(playerWins==3) return true;
                         int blueCards = 0;
                    for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
@@ -136,8 +146,10 @@ public class Main {
              
         }else if (player2FullBoard && !player1FullBoard) {
              // Player 2 has a full board and the score is <= 20
-               computerWins++;
+              computerWins++;
+               System.out.println("");
                 System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND");
+                 System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                  if(computerWins==3) return false;
                   int blueCards = 0;
              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
@@ -151,7 +163,9 @@ public class Main {
             if (20 - gf.playerTotal < 20 - gf.computerTotal) {
                   // Player 1 is closest to but not over 20
                   playerWins++;
-                   System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND: ");
+                  System.out.println("");
+                   System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
+                    System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                     if(playerWins==3) return true;
                      int blueCards = 0;
              for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
@@ -163,8 +177,10 @@ public class Main {
             }else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
                   // Player 2 is closest to but not over 20
                   
-                  computerWins++;
+                 computerWins++;
+                  System.out.println("");
                    System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND: ");
+                    System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                     if(computerWins==3) return false;
                      int blueCards = 0;
              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
@@ -176,8 +192,10 @@ public class Main {
             }
         }if(gf.playerTotal>20&&gf.computerTotal<20)
         {
-               computerWins++;
+              computerWins++;
+               System.out.println("");
                 System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND: ");
+                 System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
                  if(computerWins==3) return false;
                   int blueCards = 0;
              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
@@ -189,7 +207,9 @@ public class Main {
         if(gf.playerTotal<20&&gf.computerTotal>20)
         {
           playerWins++;
-           System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND: ");
+           System.out.println("");
+            System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND: ");
+             System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
              if(playerWins==3) return true;
               int blueCards = 0;
              for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
@@ -199,7 +219,9 @@ public class Main {
             }
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
         } // No winner according to the rules tie
+         System.out.println("");
           System.out.println("TIE");
+           System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
            return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
         
                   }
@@ -210,7 +232,6 @@ public class Main {
           }
        
           }
-    
     }
     
 
