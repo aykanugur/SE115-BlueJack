@@ -2,20 +2,36 @@
 public class Cards {
     
     int cardNumber;
-    String cardColor;
-    boolean x2;
-    boolean joker = false;
+     String cardColor;
+      boolean x2;
+       boolean joker = false;
     
 
     public Cards(int cardNumber, String cardColor) {
         
         this.cardNumber = cardNumber;
-        this.cardColor = cardColor;
+         this.cardColor = cardColor;
     }
     public Cards(boolean x2) {
         
         this.x2 = x2;
-        joker = true;
+         joker = true;
+    }
+
+    public boolean isX2() {
+        return x2;
+    }
+
+    public void setX2(boolean x2) {
+        this.x2 = x2;
+    }
+
+    public boolean isJoker() {
+        return joker;
+    }
+
+    public void setJoker(boolean joker) {
+        this.joker = joker;
     }
     
 
@@ -40,23 +56,22 @@ public class Cards {
     }
     public String getCard(){
     
-        if (joker) {
+        if (joker)
+        {
             if(x2)
             {
-            return "2x";
-            } else
+              return "2x";
+            }
+            else
             {
-            return  "+/-";
+              return  "+/-";
             }
             
-        }else
+        }
+        else
         {
-         return cardColor+cardNumber;
+          return cardColor+cardNumber;
         }
         
-    }
-    
-    
-    
-    
+    }   
 }
