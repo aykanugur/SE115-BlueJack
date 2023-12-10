@@ -335,6 +335,7 @@ public class  GameFunctions{
     int a = sc.nextInt();
     if(a==1)
     {
+    
     System.out.println("");
     System.out.println("You picked card from game deck");
     System.out.println("");

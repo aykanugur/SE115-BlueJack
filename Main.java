@@ -80,79 +80,138 @@ public class Main {
             
             gf.playText(shuffledCards, playerHand, computerHand);
            
-            
-            
-             // Check if any player has a full board and the sum is less than or equal to 20
-        boolean player1FullBoard = gf.playerTotalPlayed == 9 && gf.getPlayerTotal() <= 20;
-        boolean player2FullBoard = gf.computerTotalPlayed == 9 && gf.getComputerTotal() <= 20;
-
-        if (player1FullBoard && !player2FullBoard) {
-             // Player 1 has a full board and the score is <= 20
-             playerWins++;
-             System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND"+playerWins);
-             if(playerWins==3) return true;
-             int blueCards = 0;
-             for (int i = 0; i < gf.getPlayerTotalPlayed()+1; i++) {
-                if(blueCards==gf.getPlayerTotalPlayed()) return true;
-                if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
+          if(gf.playerTotal==20&&gf.computerTotal==20)
+          {
+           //tie   
+              System.out.println("TIE");
+              return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+          }else
+          {
+              if(gf.playerTotal==20)
+              {
+                  //player won
+                    playerWins++;
+                   System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
+                   if(playerWins==3) return true;
+                   int blueCards = 0;
+                   for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
+                   if(blueCards==gf.getPlayerTotalPlayed()) return true;
+                   if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
              return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
              
-        } else if (player2FullBoard && !player1FullBoard) {
-             // Player 2 has a full board and the score is <= 20
-             
-             computerWins++;
-             System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND"+computerWins);
+              }else
+              {
+                  if(gf.computerTotal==20)
+                  {
+                      computerWins++;
+             System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND");
              if(computerWins==3) return false;
              int blueCards = 0;
-             for (int i = 0; i < gf.getComputerTotalPlayed()+1; i++) {
+             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                 if(blueCards==gf.getComputerTotalPlayed()) return false;
                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
              return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
              
-        }
-
-        // Both players stood without having a full board or tied scores
-        if (gf.playerTotal <= 20 && gf.computerTotal <= 20) {
+                  }else
+                  {
+                   boolean player1FullBoard = gf.playerTotalPlayed == 9 && gf.getPlayerTotal() <= 20;
+                   boolean player2FullBoard = gf.computerTotalPlayed == 9 && gf.getComputerTotal() <= 20;
+                   if (player1FullBoard && !player2FullBoard) {
+                   // Player 1 has a full board and the score is <= 20
+                   playerWins++;
+                   System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
+                   if(playerWins==3) return true;
+                   int blueCards = 0;
+                   for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
+                   if(blueCards==gf.getPlayerTotalPlayed()) return true;
+                   if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                
+            }
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+             
+        }else if (player2FullBoard && !player1FullBoard) {
+             // Player 2 has a full board and the score is <= 20
+             
+             computerWins++;
+             System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND");
+             if(computerWins==3) return false;
+             int blueCards = 0;
+             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
+                if(blueCards==gf.getComputerTotalPlayed()) return false;
+                if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                
+            }
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+             
+        }if (gf.playerTotal <= 20 && gf.computerTotal <= 20) {
             if (20 - gf.playerTotal < 20 - gf.computerTotal) {
                   // Player 1 is closest to but not over 20
                   playerWins++;
-                  System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND"+playerWins);
+                  System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND: ");
                   if(playerWins==3) return true;
                   int blueCards = 0;
-             for (int i = 0; i < gf.getPlayerTotalPlayed()+1; i++) {
+             for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
                 if(blueCards==gf.getPlayerTotalPlayed()) return false;
                 if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
-            } else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
+            }else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
                   // Player 2 is closest to but not over 20
                   
                   computerWins++;
-                  System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND"+computerWins);
+                  System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND: ");
                   if(computerWins==3) return false;
                   int blueCards = 0;
-             for (int i = 0; i < gf.getComputerTotalPlayed()+1; i++) {
+             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                 if(blueCards==gf.getComputerTotalPlayed()) return false;
                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
             }
+        }if(gf.playerTotal>20&&gf.computerTotal<20)
+        {
+        computerWins++;
+                  System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND: ");
+                  if(computerWins==3) return false;
+                  int blueCards = 0;
+             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
+                if(blueCards==gf.getComputerTotalPlayed()) return false;
+                if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                 return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+                
+            }
         }
-
-          // No winner according to the rules tie
+        if(gf.playerTotal<20&&gf.computerTotal>20)
+        {
+        playerWins++;
+                  System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND: ");
+                  if(playerWins==3) return true;
+                  int blueCards = 0;
+             for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
+                if(blueCards==gf.getPlayerTotalPlayed()) return false;
+                if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                
+            }
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+        } // No winner according to the rules tie
           System.out.println("TIE");
           return play(shuffledCards, playerHand, computerHand, playerWins, computerWins);
+        
+                  }
+                  
+              }
+              
+       
+          }
+       
+          }
+    
     }
- 
-      }  
-    
-    
-    
     
 
