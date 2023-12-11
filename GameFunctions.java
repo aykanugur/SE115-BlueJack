@@ -2,11 +2,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class  GameFunctions{
-
-    public GameFunctions(int totalPlayed) {
-        this.totalPlayed = totalPlayed;
-    }
-    
      Random random = new Random();
       Cards[] playerBoardCards = new Cards[9];
        Cards[] computerBoardCards = new Cards[9];
@@ -23,8 +18,34 @@ public class  GameFunctions{
         Cards[] playerHand = new Cards[4];
          Scanner sc = new Scanner(System.in);
         int playerTotal;
+
+    public int[] getPlayerHandPlayed() {
+        return playerHandPlayed;
+    }
+
+    public void setPlayerHandPlayed(int[] playerHandPlayed) {
+        this.playerHandPlayed = playerHandPlayed;
+    }
+
+    public int[] getComputerHandPlayed() {
+        return computerHandPlayed;
+    }
+
+    public void setComputerHandPlayed(int[] computerHandPlayed) {
+        this.computerHandPlayed = computerHandPlayed;
+    }
        boolean stand = true;
       boolean computerstand = true;
+      
+      public GameFunctions(int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed) {
+        this.totalPlayed = totalPlayed;
+        this.computerHandPlayed = computerHandPlayed;
+        this.playerHandPlayed = playerHandPlayed;
+    }
+      public GameFunctions(int totalPlayed ) {
+        this.totalPlayed = totalPlayed;
+    }
+      
 
     public Cards[] getPlayerBoardCards() {
         return playerBoardCards;

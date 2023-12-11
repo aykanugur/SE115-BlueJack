@@ -16,7 +16,7 @@ public class Main {
              int choice = sc.nextInt();
             if(choice==1) 
             {
-              whoWon = play(shuffledCards, playerHand, computerHand,0,0,5);
+              whoWon = play(shuffledCards, playerHand, computerHand,0,0,5,gf.getComputerHandPlayed(),gf.getPlayerHandPlayed());
             if(whoWon)
             {
                System.out.println("");
@@ -46,10 +46,10 @@ public class Main {
             }
         }  
     }
-    public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins,int totalPlayed){
+    public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins,int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed ){
         
         
-         GameFunctions gf = new GameFunctions(totalPlayed);
+         GameFunctions gf = new GameFunctions(totalPlayed,computerHandPlayed,playerHandPlayed);
           gf.playText(shuffledCards,playerHand,computerHand);//start of player turn
         
  
@@ -64,6 +64,8 @@ public class Main {
                  break;
              }
               totalPlayed= gf.getTotalPlayed();
+              playerHandPlayed = gf.getPlayerHandPlayed();
+              
             }
             if(gf.isComputerstand())
             {
@@ -77,6 +79,7 @@ public class Main {
 
             }
               totalPlayed= gf.getTotalPlayed();
+              computerHandPlayed = gf.getComputerHandPlayed();
   
         }
             
@@ -87,7 +90,7 @@ public class Main {
                System.out.println("");
                 System.out.println("TIE");
                  System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
-               return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+               return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
           }
           else
           {
@@ -104,7 +107,7 @@ public class Main {
                       if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
              
               }
               else
@@ -122,7 +125,7 @@ public class Main {
                  if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
              
                   }
                   else
@@ -142,7 +145,7 @@ public class Main {
                       if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
              
         }else if (player2FullBoard && !player1FullBoard) {
              // Player 2 has a full board and the score is <= 20
@@ -157,7 +160,7 @@ public class Main {
                    if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
              
         }if (gf.playerTotal <= 20 && gf.computerTotal <= 20) {
             if (20 - gf.playerTotal < 20 - gf.computerTotal) {
@@ -173,7 +176,7 @@ public class Main {
                  if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
             }else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
                   // Player 2 is closest to but not over 20
                   
@@ -188,7 +191,7 @@ public class Main {
                  if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
             }
         }if(gf.playerTotal>20&&gf.computerTotal<20)
         {
@@ -201,7 +204,7 @@ public class Main {
              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                 if(blueCards==gf.getComputerTotalPlayed()) return false;
                  if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);  
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);  
             }
         }
         if(gf.playerTotal<20&&gf.computerTotal>20)
@@ -217,12 +220,12 @@ public class Main {
                  if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
         } // No winner according to the rules tie
          System.out.println("");
           System.out.println("TIE");
            System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
-           return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed);
+           return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
         
                   }
                   
