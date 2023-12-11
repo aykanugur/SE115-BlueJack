@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -93,7 +94,7 @@ public class  GameFunctions{
       return gamedeckCreator(gameDeck);
     } 
     public void startText(){
-    
+           System.out.println("");
             System.out.println("*************************");
              System.out.println("*       BLUEJACK       *");
               System.out.println("*************************");
@@ -316,31 +317,61 @@ public class  GameFunctions{
     }
     public void startTurn()
     {
-      System.out.println("");
-       System.out.println("1) Type 1 for stand");
-        System.out.println("2) Type 2 for pick cards");
-         System.out.print("Enter your choice: ");
-          int a = sc.nextInt();
-    if(a==1)
+         int choice;
+          while (true) {
+            try {
+                System.out.println("");
+                 System.out.println("1) Type 1 for stand");
+                  System.out.println("2) Type 2 for pick cards");
+                   System.out.print("Enter your choice: ");
+                    choice = sc.nextInt();
+                     if (choice != 1 && choice != 2) {
+                      System.out.println("You entered a value other than 1 or 2. Try again.");
+                       continue; 
+                }
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("");
+                System.out.println("You have entered unvalid value. Please enter an integer value.");
+                sc.nextLine(); 
+            }
+        }
+          
+    if(choice==1)
     {
         System.out.println("");
          System.out.println("You chosed to stand");
           System.out.println("");
            stand = false;
     }
-    if(a==2)
+    if(choice==2)
     {
         secondStep();
     }
      }
     public void secondStep()
     {
-      System.out.println("");
-       System.out.println("1) Type 1 for pick card from game deck");
-        System.out.println("2) Type 2 for pick card from your hand");
-         System.out.print("Enter your choice: ");
-          int a = sc.nextInt();
-    if(a==1)
+         int choice;
+          while (true) {
+            try {
+                System.out.println("");
+                 System.out.println("1) Type 1 for pick card from game deck");
+                  System.out.println("2) Type 2 for pick card from your hand");
+                   System.out.print("Enter your choice: ");
+                    choice = sc.nextInt();
+                     if (choice != 1 && choice != 2) {
+                      System.out.println("You entered a value other than 1 or 2. Try again.");
+                       continue; 
+                }
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("");
+                System.out.println("You have entered unvalid value. Please enter an integer value.");
+                sc.nextLine(); 
+            }
+        }
+          
+    if(choice==1)
     {
         System.out.println("");
          System.out.println("You picked card from game deck");
@@ -352,34 +383,33 @@ public class  GameFunctions{
                playText(shuffledCards, playerHand, computerHand);
                 thirdStep();
     }
-    if(a==2)
+    if(choice==2)
     {
-    int choice;
-       while (true) {            
-        System.out.println("");
-         System.out.println("Please enter which row of cards you would like to choose");
-          System.out.print("Enter your choice: ");
-           choice = sc.nextInt();
-    if(choice<1||choice>4)
-    {
-        System.out.println("");
-         System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-          System.out.println("");
-    }
-    else
-    {
-        if(playerHandPlayed[choice-1]==1)
-        {
-            System.out.println("");
-             System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-              System.out.println("");
+        while (true) {
+            try {
+                System.out.println("");
+                 System.out.println("Please enter which row of cards you would like to choose");
+                  System.out.print("Enter your choice: ");
+                   choice = sc.nextInt();
+                     if (choice<1||choice>4) {
+                       System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+                       continue;
+                }
+                     if(playerHandPlayed[choice-1]==1)
+                     {
+                      System.out.println("");
+                       System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+                        System.out.println("");
+                        continue;
+                     } 
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("");
+                System.out.println("You have entered unvalid value. Please enter an integer value.");
+                sc.nextLine(); 
+            }
         }
-        else
-        {
-            break;
-        }
-    }
-        }
+        
      if(playerHand[choice-1].isJoker()==true)
      {
          if(totalPlayed==0)
@@ -431,12 +461,26 @@ public class  GameFunctions{
     }
     public void thirdStep()
     {
-        System.out.println("");
-         System.out.println("1) Type 1 for end turn");
-          System.out.println("2) Type 2 for pick cards from your hand");
-           System.out.print("Enter your choice: ");
-            int a = sc.nextInt();
-    if(a==1)
+        int choice;
+        while (true) {
+            try {
+                 System.out.println("");
+                  System.out.println("1) Type 1 for end turn");
+                   System.out.println("2) Type 2 for pick cards from your hand");
+                    System.out.print("Enter your choice: ");
+                choice = sc.nextInt();
+                 if (choice != 1 && choice != 2) {
+                    System.out.println("You entered a value other than 1 or 2. Try again.");
+                    continue; 
+                }
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("");
+                System.out.println("You have entered unvalid value. Please enter an integer value.");
+                sc.nextLine(); 
+            }
+        }
+    if(choice==1)
     {   
        System.out.println("");
         System.out.println("You chosed to end the turn");
@@ -447,38 +491,37 @@ public class  GameFunctions{
     }
       playText(shuffledCards, playerHand, computerHand);
     }
-    if(a==2)
+    if(choice==2)
     {
       pickAgain();
     }
     }
     public void pickAgain()
     {
-      int choice;
-       while (true) {            
-        System.out.println("");
-         System.out.println("Please enter which row of cards you would like to choose");
-          System.out.print("Enter your choice: ");
-           choice = sc.nextInt();
-    if(choice<1||choice>4)
-    {
-        System.out.println("");
-         System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-          System.out.println("");
-    }
-    else
-    {
-        if(playerHandPlayed[choice-1]==1)
-        {
-            System.out.println("");
-             System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-              System.out.println("");
-        }
-        else
-        {
-            break;
-        }
-    }
+        int choice;
+      while (true) {
+            try {
+                System.out.println("");
+                 System.out.println("Please enter which row of cards you would like to choose");
+                  System.out.print("Enter your choice: ");
+                   choice = sc.nextInt();
+                     if (choice<1||choice>4) {
+                       System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+                       continue;
+                }
+                     if(playerHandPlayed[choice-1]==1)
+                     {
+                      System.out.println("");
+                       System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+                        System.out.println("");
+                        continue;
+                     } 
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("");
+                System.out.println("You have entered unvalid value. Please enter an integer value.");
+                sc.nextLine(); 
+            }
         }
      if(playerHand[choice-1].isJoker()==true)
      {
