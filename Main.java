@@ -56,18 +56,18 @@ public class Main {
         
         
          GameFunctions gf = new GameFunctions(totalPlayed,computerHandPlayed,playerHandPlayed);
-          gf.playText(shuffledCards,playerHand,computerHand);//start of player turn
+          gf.playText(shuffledCards,playerHand,computerHand,true);//start of player turn
         
  
             while ((gf.getstand()||gf.isComputerstand())&&gf.getComputerTotal()<=20&&gf.playerTotal<=20) {            
             if(gf.getstand())// oyuncu
             {
               gf.startTurn();
-               gf.playText(shuffledCards,playerHand,computerHand);
+               gf.playText(shuffledCards,playerHand,computerHand,false);
             
            if(gf.getPlayerTotal()>=20)
              {
-                 break;
+                 gf.stand = false;
              }
               totalPlayed= gf.getTotalPlayed();
               playerHandPlayed = gf.getPlayerHandPlayed();
@@ -76,11 +76,11 @@ public class Main {
             if(gf.isComputerstand())
             {
               gf.startToThink();
-               gf.playText(shuffledCards, playerHand, computerHand);
+               gf.playText(shuffledCards, playerHand, computerHand,true);
               
               if(gf.getComputerTotal()>=20)
              {
-                 break;
+                 gf.computerstand= false;
              }
 
             }
@@ -89,7 +89,7 @@ public class Main {
   
         }
             
-            gf.playText(shuffledCards, playerHand, computerHand);
+            gf.playText(shuffledCards, playerHand, computerHand,true);
            
           if(gf.playerTotal==20&&gf.computerTotal==20)
           {

@@ -11,7 +11,7 @@ public class  GameFunctions{
           int playerDeckPlayed = 0;
          int computerTotalPlayed = 0;
         int[] computerHandPlayed = new int[4];
-       int computerDeckPlayed = 0;
+       
       int totalPlayed;
      int computerTotal;
       Cards[] shuffledCards = new Cards[40];
@@ -248,7 +248,7 @@ public class  GameFunctions{
        }
        return secondStepDeckGenerator(deck);
     }
-    public void playText(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand){
+    public void playText(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,boolean show){
     this.shuffledCards = shuffledCards;
      this.computerHand = computerHand;
       this.playerHand = playerHand;
@@ -272,11 +272,12 @@ public class  GameFunctions{
         for (int i = 0; i < 4; i++) {
             if(1==computerHandPlayed[i])
             {
+                
                 computerHandStrings[i] = computerHand[i].getCard();
             }
             else
             {
-                computerHandStrings[i] = "***";
+                 computerHandStrings[i] = "***";
             }
         }
         for (int i = 0; i < 9; i++) {
@@ -301,6 +302,8 @@ public class  GameFunctions{
                  playerBoard[i] = "   ";
             }
         }
+            if(show)
+            {
             System.out.println("");
              System.out.println("                  -------------------------------");
               System.out.println("Computer's hand-->"+"    "+computerHandStrings[0]+"    "+computerHandStrings[1]+"    "+computerHandStrings[2]+"    "+computerHandStrings[3]);
@@ -314,6 +317,7 @@ public class  GameFunctions{
                       System.out.println("");
                        System.out.println("your deck: "+playerTotal);
                         System.out.println("Computer deck: "+ computerTotal);
+            }
     }
     public void startTurn()
     {
@@ -380,7 +384,7 @@ public class  GameFunctions{
             totalPlayed++;
              playerDeckPlayed++;
               playerTotalPlayed++; 
-               playText(shuffledCards, playerHand, computerHand);
+               playText(shuffledCards, playerHand, computerHand,true);
                 thirdStep();
     }
     if(choice==2)
@@ -429,7 +433,7 @@ public class  GameFunctions{
                 playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
                  playerHandPlayed[choice-1] = 1;
                   
-                     playText(shuffledCards, playerHand, computerHand);
+                     playText(shuffledCards, playerHand, computerHand,true);
                       thirdStep();
          }else
          {
@@ -439,7 +443,7 @@ public class  GameFunctions{
                 playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
                  playerHandPlayed[choice-1] = 1;
                   
-                     playText(shuffledCards, playerHand, computerHand);
+                     playText(shuffledCards, playerHand, computerHand,true);
                       thirdStep();
           }
          }
@@ -454,7 +458,7 @@ public class  GameFunctions{
               totalPlayed++;
                playerDeckPlayed++;
                 playerTotalPlayed++;
-                 playText(shuffledCards, playerHand, computerHand);
+                 playText(shuffledCards, playerHand, computerHand,true);
                   thirdStep();
      }
       }
@@ -485,11 +489,7 @@ public class  GameFunctions{
        System.out.println("");
         System.out.println("You chosed to end the turn");
          System.out.println("");
-    if(computerstand==false)
-    {
-        stand = false;
-    }
-      playText(shuffledCards, playerHand, computerHand);
+      playText(shuffledCards, playerHand, computerHand,true);
     }
     if(choice==2)
     {
@@ -541,9 +541,8 @@ public class  GameFunctions{
                System.out.println("");
                 playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
                  playerHandPlayed[choice-1] = 1;
-                  
-                     playText(shuffledCards, playerHand, computerHand);
-                      thirdStep();
+                  playText(shuffledCards, playerHand, computerHand,true);
+                   thirdStep();
          }else
          {
              System.out.println("");
@@ -551,11 +550,8 @@ public class  GameFunctions{
                System.out.println("");
                 playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
                  playerHandPlayed[choice-1] = 1;
-                  
-                   
-                    
-                     playText(shuffledCards, playerHand, computerHand);
-                      thirdStep();
+                  playText(shuffledCards, playerHand, computerHand,true);
+                   thirdStep();
           }
          }
      }
@@ -569,7 +565,7 @@ public class  GameFunctions{
               totalPlayed++;
                playerDeckPlayed++;
                 playerTotalPlayed++;
-                 playText(shuffledCards, playerHand, computerHand);
+                 playText(shuffledCards, playerHand, computerHand,true);
                   thirdStep();
      }
     }
@@ -583,26 +579,73 @@ public class  GameFunctions{
     }
     public void startToThink()
     {
-      if(computerTotal<18)
-    {
-      computerBoardCards[computerTotalPlayed] = shuffledCards[totalPlayed];
-       totalPlayed++;
-        computerDeckPlayed++;
-         computerTotalPlayed++;    
-    }
-    if(computerTotal<=20&&computerTotal>=16)
+         if(computerTotal<=20&&computerTotal>=17)
     {
       computerstand = false;
     }
-    if(computerTotal>20)
+        
+        for (int i = 0; i < 4; i++) {
+            
+            if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0)
+            {
+              computerBoardCards[computerTotalPlayed] = computerHand[i];
+           computerHandPlayed[i] = 1;
+            totalPlayed++;
+              computerTotalPlayed++;
+              computerstand = false;
+               break;
+            }
+              }
+           playText(shuffledCards, playerHand, computerHand,false);
+            if(computerTotal<=20&&computerTotal>=16)
+    {
+      computerstand = false;
+    }
+        
+           if(computerTotal<18)
+    {
+      computerBoardCards[computerTotalPlayed] = shuffledCards[totalPlayed];
+       totalPlayed++;
+         computerTotalPlayed++;    
+         playText(shuffledCards, playerHand, computerHand,false);
+    }
+           
+            if(computerTotal<=20&&computerTotal>=16)
+    {
+      computerstand = false;
+    }
+           
+           
+           
+           for (int i = 0; i < 4; i++) {
+            
+            if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0)
+            {
+              computerBoardCards[computerTotalPlayed] = computerHand[i];
+           computerHandPlayed[i] = 1;
+            totalPlayed++;
+              computerTotalPlayed++;
+              computerstand = false;
+               break;
+            }
+              }
+           playText(shuffledCards, playerHand, computerHand,false);
+           
+            if(computerTotal<=20&&computerTotal>=16)
+    {
+      computerstand = false;
+    }
+           
+           
+           if(computerTotal>20)
     {
        int min= 999;
         int whichHandCard = 999;
          for (int i = 0; i < 4; i++) {
-            if((computerTotal-computerHand[i].getCardNumber())<=20&&computerHandPlayed[i]==0)
+            if((computerTotal+computerHand[i].getCardNumber())<=20&&computerHandPlayed[i]==0&&computerHand[i].isJoker()==false)
             {
-            if(computerTotal-computerHand[i].getCardNumber()<min)
-                min = computerTotal-computerHand[i].getCardNumber();
+            if(computerHand[i].getCardNumber()<min)
+                min = computerHand[i].getCardNumber();
                  whichHandCard = i;
             }
         }
@@ -611,7 +654,6 @@ public class  GameFunctions{
           computerBoardCards[computerTotalPlayed] = computerHand[whichHandCard];
            computerHandPlayed[whichHandCard] = 1;
             totalPlayed++;
-             computerDeckPlayed++;
               computerTotalPlayed++;
         }
         else
@@ -619,8 +661,11 @@ public class  GameFunctions{
           computerstand = false;
         }
     }
-    if(stand==false) computerstand= false;
-     }
-    }
-
+           if (computerTotal>20) {
+               computerstand = false;
+            
+        }
+            if(stand==false&&computerTotal>playerTotal) computerstand= false; 
+ }
+}
 
