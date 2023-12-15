@@ -73,6 +73,7 @@ public class Main {
               playerHandPlayed = gf.getPlayerHandPlayed();
               
             }
+            if(totalPlayed==40) break;
             if(gf.isComputerstand())
             {
               gf.startToThink();
@@ -86,10 +87,12 @@ public class Main {
             }
               totalPlayed= gf.getTotalPlayed();
               computerHandPlayed = gf.getComputerHandPlayed();
+               if(totalPlayed==40) break;
   
         }
             
             gf.playText(shuffledCards, playerHand, computerHand,true);
+            
            
           if(gf.playerTotal==20&&gf.computerTotal==20)
           {
@@ -306,11 +309,11 @@ public class Main {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
             String gameResult = player1 + ":" + score1 + " - " + player2 + ":" + score2 + ", " + dateFormat.format(new Date());
-            File file = new File("GameLog.text");
+            File file = new File("GameLog.txt");
             if (!file.exists()) {
                 file.createNewFile();
             }
-            BufferedReader reader = new BufferedReader(new FileReader("GameLog.text"));
+            BufferedReader reader = new BufferedReader(new FileReader("GameLog.txt"));
             String line;
             StringBuilder history = new StringBuilder();
             int count = 0;
@@ -321,7 +324,7 @@ public class Main {
                 }
             }
             reader.close();
-            FileWriter fileWriter = new FileWriter("GameLog.text");
+            FileWriter fileWriter = new FileWriter("GameLog.txt");
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write(gameResult + "\n");
             writer.write(history.toString());
