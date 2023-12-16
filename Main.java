@@ -4,6 +4,7 @@ import java.util.Random;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
 public class Main {
     
     public static void main(String[] args) {
@@ -291,34 +292,62 @@ public class Main {
        
           }
     public static void recordGame(String player1, int score1, String player2, int score2) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-            String gameResult = player1 + ":" + score1 + " - " + player2 + ":" + score2 + ", " + dateFormat.format(new Date());
-            File file = new File("GameLog.txt");
-            if (!file.exists()) {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        String gameResult = player1 + ":" + score1 + " - " + player2 + ":" + score2 + ", " + dateFormat.format(new Date());
+        File file = new File("GameLog.txt");    
+        FileWriter fw = null;
+        Formatter f = null;
+        String[] textArray = null;
+        Scanner reader = null;
+        String text= "";
+        if(file.exists()!=true)
+        {
+            try {
                 file.createNewFile();
+            } catch (Exception e) {
+                
             }
-            BufferedReader reader = new BufferedReader(new FileReader("GameLog.txt"));
-            String line;
-            StringBuilder history = new StringBuilder();
-            int count = 0;
-            while ((line = reader.readLine()) != null) {
-                if (count < 20) {
-                    history.append(line).append("\n");
-                    count++;
-                }
+        }
+        
+        try {
+            reader = new Scanner(file);
+            while (reader.hasNextLine()) {                
+                
+                text += reader.nextLine()+"\n";
+                textArray = text.split("\n");
+                
             }
+        } catch (Exception e) {
+            
+        } finally {
             reader.close();
-            FileWriter fileWriter = new FileWriter("GameLog.txt");
-            BufferedWriter writer = new BufferedWriter(fileWriter);
-            writer.write(gameResult + "\n");
-            writer.write(history.toString());
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        try {
+            fw = new FileWriter(file,false);
+            f = new Formatter(fw);
+            f.format("%s\n", "");
+            fw = new FileWriter(file,true);
+            f = new Formatter(fw);
+            int a = 1;
+            f.format("%s\n", gameResult);
+            
+            if(textArray!=null)
+            {
+            for (String s : textArray) {
+                a++;
+                 f.format("%s\n", s);
+                 if(a==10) break;
+                
+             }
+            }
+           
+            fw.close();
+            
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
-
-    }
+     }
     
 
