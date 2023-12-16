@@ -361,8 +361,6 @@ public class  GameFunctions{
                 thirdStep();
     }
      }
-    
-    
     public void thirdStep()
     {
         int choice;
@@ -433,15 +431,6 @@ public class  GameFunctions{
         }
      if(playerHand[choice-1].isJoker()==true)
      {
-         if(totalPlayed==0)
-         {
-             System.out.println("");
-             System.out.println("You cannot play X2 OR +/- BEFORE PLAY ANY NUMBER PLS TRY AGAIN");
-              System.out.println("");
-               pickAgain();
-         }
-         else
-         {
              if(playerHand[choice-1].isX2()==true)
          {
              System.out.println("");
@@ -450,7 +439,6 @@ public class  GameFunctions{
                 playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
                  playerHandPlayed[choice-1] = 1;
                   playText(shuffledCards, playerHand, computerHand,true);
-                   thirdStep();
          }else
          {
              System.out.println("");
@@ -458,10 +446,8 @@ public class  GameFunctions{
                System.out.println("");
                 playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
                  playerHandPlayed[choice-1] = 1;
-                  playText(shuffledCards, playerHand, computerHand,true);
-                   thirdStep();
+                  playText(shuffledCards, playerHand, computerHand,true); 
           }
-         }
      }
      else
      {
@@ -473,7 +459,7 @@ public class  GameFunctions{
                playerDeckPlayed++;
                 playerTotalPlayed++;
                  playText(shuffledCards, playerHand, computerHand,true);
-                  thirdStep();
+                  
      }
     }
     public void setstand(boolean stand)
@@ -492,11 +478,6 @@ public class  GameFunctions{
     }
        
            playText(shuffledCards, playerHand, computerHand,false);
-            if(computerTotal<=20&&computerTotal>=16)
-    {
-      computerstand = false;
-    }
-        
            if(computerTotal<18)
     {
       computerBoardCards[computerTotalPlayed] = shuffledCards[totalPlayed];
@@ -505,32 +486,10 @@ public class  GameFunctions{
          playText(shuffledCards, playerHand, computerHand,false);
     }
            
-            if(computerTotal<=20&&computerTotal>=16)
+            if(computerTotal<=20&&computerTotal>=17)
     {
       computerstand = false;
     }
-           
-           
-           
-           for (int i = 0; i < 4; i++) {
-            
-            if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0)
-            {
-              computerBoardCards[computerTotalPlayed] = computerHand[i];
-           computerHandPlayed[i] = 1;
-              computerTotalPlayed++;
-              computerstand = false;
-               break;
-            }
-              }
-           playText(shuffledCards, playerHand, computerHand,false);
-           
-            if(computerTotal<=20&&computerTotal>=16)
-    {
-      computerstand = false;
-    }
-           
-           
            if(computerTotal>20)
     {
        int min= 999;
@@ -553,7 +512,26 @@ public class  GameFunctions{
         {
           computerstand = false;
         }
+    }else
+           {
+              for (int i = 0; i < 4; i++) {
+            
+            if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0)
+            {
+              computerBoardCards[computerTotalPlayed] = computerHand[i];
+           computerHandPlayed[i] = 1;
+              computerTotalPlayed++;
+              computerstand = false;
+               break;
+            }
+              } 
+           }
+    playText(shuffledCards, playerHand, computerHand,false);
+    if(computerTotal<=20&&computerTotal>=17)
+    {
+      computerstand = false;
     }
+    
            if (computerTotal>20) {
                computerstand = false;
             
@@ -562,3 +540,9 @@ public class  GameFunctions{
  }
 }
 
+
+
+
+
+           
+            

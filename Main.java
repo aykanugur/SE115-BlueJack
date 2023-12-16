@@ -14,6 +14,7 @@ public class Main {
             Cards[] playerHand =gf.firstStepDeckGenerator(shuffledCards, true);
              Cards[] computerHand = gf.firstStepDeckGenerator(shuffledCards, false);
               boolean whoWon;
+               String user = "";
                int choice;
         while (true) {
             try {
@@ -23,6 +24,19 @@ public class Main {
                     System.out.println("You entered a value other than 1 or 2. Try again.");
                     continue; 
                 }
+                 if(choice==1)
+                 {
+                     while (true) {                    
+                    try {
+                        sc.nextLine();
+                        System.out.print("Please enter your name: ");
+                         user = sc.nextLine().toUpperCase();
+                          break;
+                    } catch (Exception e) {
+                        System.err.println("Pls enter valid user name");
+                    }
+                }
+                 }
                 break; 
             } catch (InputMismatchException e) {
                 System.out.println("");
@@ -33,11 +47,12 @@ public class Main {
         
         if(choice==1) 
             {
-              whoWon = play(shuffledCards, playerHand, computerHand,0,0,5,gf.getComputerHandPlayed(),gf.getPlayerHandPlayed());
+                
+              whoWon = play(shuffledCards, playerHand, computerHand,0,0,5,gf.getComputerHandPlayed(),gf.getPlayerHandPlayed(),user);
             if(whoWon)
             {
                System.out.println("");
-                System.out.println("User won");
+                System.out.println(user+" won");
                  choice = 2;
             } 
             else
@@ -52,14 +67,14 @@ public class Main {
            System.out.println("");
            sc.close();
     }
-    public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins,int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed ){
+    public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins,int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed,String user){
         
         
          GameFunctions gf = new GameFunctions(totalPlayed,computerHandPlayed,playerHandPlayed);
           gf.playText(shuffledCards,playerHand,computerHand,true);//start of player turn
         
  
-            while ((gf.getstand()||gf.isComputerstand())&&gf.getComputerTotal()<=20&&gf.playerTotal<=20) {            
+            while ((gf.getstand()||gf.isComputerstand())&&gf.getComputerTotal()<=20&&gf.playerTotal<=20&&gf.computerTotalPlayed<=9&&gf.playerTotalPlayed<=9) {            
             if(gf.getstand())// oyuncu
             {
               gf.startTurn();
@@ -96,10 +111,33 @@ public class Main {
            
           if(gf.playerTotal==20&&gf.computerTotal==20)
           {
-               System.out.println("");
-                System.out.println("TIE");
-                 System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
-               return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+               int blueCards = 0;
+                   for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
+                    
+                      if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                
+            }
+                   if(blueCards==gf.getPlayerTotalPlayed())
+                     {
+                         recordGame(user+": ", 3, "COMPUTER: ", computerWins);
+                         return true;
+                     } 
+                    blueCards = 0;
+                   for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
+                    
+                      if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                
+            }
+                   if(blueCards==gf.getComputerTotalPlayed())
+                     {
+                         recordGame(user+": ", playerWins, "COMPUTER: ", 3);
+                         return false;
+                     }
+         System.out.println("");
+          System.out.println("TIE");
+           System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
+           return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
+                   
           }
           else
           {
@@ -107,24 +145,25 @@ public class Main {
               {
                    playerWins++;
                     System.out.println("");
-                     System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
-                      System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                     System.out.println(user+" WON THIS ROUND TIME FOR NEXT ROUND");
+                      System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                    if(playerWins==3)
                    {
-                       recordGame("USER: ", playerWins, "Computer: ", computerWins);
+                       recordGame(user+": ", playerWins, "Computer: ", computerWins);
                        return true;
                    } 
                      int blueCards = 0;
                    for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
-                     if(blueCards==gf.getPlayerTotalPlayed())
-                     {
-                         recordGame("USER: ", 3, "COMPUTER: ", computerWins);
-                         return true;
-                     } 
+                    
                       if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+                   if(blueCards==gf.getPlayerTotalPlayed())
+                     {
+                         recordGame(user+": ", 3, "COMPUTER: ", computerWins);
+                         return true;
+                     } 
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
              
               }
               else
@@ -134,23 +173,24 @@ public class Main {
                      computerWins++;
                       System.out.println("");
                        System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND");
-                        System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                        System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                         if(computerWins==3)
                         {
-                            recordGame("USER: ", playerWins, "Computer", computerWins);
+                            recordGame(user+": ", playerWins, "Computer", computerWins);
                              return false;
                         } 
                          int blueCards = 0;
-             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
-                if(blueCards==gf.getComputerTotalPlayed())
-                {
-                    recordGame("USER: ", playerWins, "COMPUTER: ", 3);
-                    return false;
-                } 
-                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                   for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
+                    
+                      if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
                 
             }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+                   if(blueCards==gf.getComputerTotalPlayed())
+                     {
+                         recordGame(user+": ", playerWins, "COMPUTER: ", 3);
+                         return false;
+                     } 
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
              
                   }
                   else
@@ -161,144 +201,89 @@ public class Main {
                    // Player 1 has a full board and the score is <= 20
                     playerWins++;
                      System.out.println("");
-                      System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
-                       System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                      System.out.println(user+" WON THIS ROUND TIME FOR NEXT ROUND");
+                       System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                        if(playerWins==3)
                        {
-                           recordGame("USER: ", playerWins, "COMPUTER: ", computerWins);
+                           recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
                            return true;
                        } 
-                        int blueCards = 0;
-                   for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
-                     if(blueCards==gf.getPlayerTotalPlayed())
-                     {
-                         recordGame("USER: ", 3, "COMPUTER: ", computerWins);
-                         return true;
-                     } 
-                      if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                
-            }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+                      
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
              
         }else if (player2FullBoard && !player1FullBoard) {
              // Player 2 has a full board and the score is <= 20
               computerWins++;
                System.out.println("");
                 System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND");
-                 System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                 System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                  if(computerWins==3)
                  {
-                     recordGame("USER: ", playerWins, "COMPUTER: ", computerWins);
+                     recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
                       return false;
                  } 
-                  int blueCards = 0;
-             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
-                  if(blueCards==gf.getComputerTotalPlayed())
-                  {
-                      recordGame("USER: ", playerWins, "COMPUTER: ", 3);
-                       return false;
-                  } 
-                   if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                
-            }
-             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+                  
+             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
              
         }if (gf.playerTotal <= 20 && gf.computerTotal <= 20) {
             if (20 - gf.playerTotal < 20 - gf.computerTotal) {
                   // Player 1 is closest to but not over 20
                   playerWins++;
                   System.out.println("");
-                   System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND");
-                    System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                   System.out.println(user+" WON THIS ROUND TIME FOR NEXT ROUND");
+                    System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                     if(playerWins==3)
                     {
-                        recordGame("USER: ", playerWins, "COMPUTER: ", computerWins);
+                        recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
                         return true;
                     } 
-                     int blueCards = 0;
-             for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
-                if(blueCards==gf.getPlayerTotalPlayed())
-                {
-                    recordGame("USER: ", 3, "COMPUTER: ", computerWins);
-                    return true;
-                } 
-                 if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                
-            }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+                     
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
             }else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
                   // Player 2 is closest to but not over 20
                   
                  computerWins++;
                   System.out.println("");
                    System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND: ");
-                    System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                    System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                     if(computerWins==3)
                     {
-                        recordGame("USER: ", playerWins, "COMPUTER: ", computerWins);
+                        recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
                         return false;
                     } 
-                     int blueCards = 0;
-             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
-                if(blueCards==gf.getComputerTotalPlayed())
-                {
-                    recordGame("USER: ", playerWins, "COMPUTER: ", 3);
-                    return false;
-                } 
-                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                
-            }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
             }
         }if(gf.playerTotal>20&&gf.computerTotal<20)
         {
               computerWins++;
                System.out.println("");
                 System.out.println("COMPUTER WON THIS ROUND TIME FOR NEXT ROUND: ");
-                 System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+                 System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
                  if(computerWins==3)
                  {
-                     recordGame("USER: ", playerWins, "COMPUTER: ", computerWins);
+                     recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
                      return false;
                  } 
-                  int blueCards = 0;
-             for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
-                if(blueCards==gf.getComputerTotalPlayed())
-                {
-                     recordGame("USER: ", playerWins, "COMPUTER: ", 3);
-                     return false;
-                } 
-                 if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);  
-            }
+                  
         }
         if(gf.playerTotal<20&&gf.computerTotal>20)
         {
           playerWins++;
            System.out.println("");
-            System.out.println("PLAYER WON THIS ROUND TIME FOR NEXT ROUND: ");
-             System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
+            System.out.println(user+" WON THIS ROUND TIME FOR NEXT ROUND: ");
+             System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
              if(playerWins==3)
              {
-                 recordGame("USER: ", playerWins, "COMPUTER: ", computerWins);
+                 recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
                  return true;
              } 
-              int blueCards = 0;
-             for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
-                if(blueCards==gf.getPlayerTotalPlayed())
-                {
-                    recordGame("USER: ", 3, "COMPUTER: ", computerWins);
-                    return true;
-                } 
-                 if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
-                
-            }
-                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+              
+                  return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
         } // No winner according to the rules tie
          System.out.println("");
           System.out.println("TIE");
-           System.out.println("PLAYER: "+playerWins+" "+"COMPUTER: "+computerWins);
-           return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed);
+           System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
+           return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
         
                   }
               }
