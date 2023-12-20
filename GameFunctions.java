@@ -3,22 +3,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class  GameFunctions{
-     Random random = new Random();
+      Random random = new Random();
       Cards[] playerBoardCards = new Cards[9];
-       Cards[] computerBoardCards = new Cards[9];
-        int playerTotalPlayed = 0;
-         int[] playerHandPlayed = new int[4];
-          int playerDeckPlayed = 0;
-         int computerTotalPlayed = 0;
-        int[] computerHandPlayed = new int[4];
-       
+      Cards[] computerBoardCards = new Cards[9];
+      int playerTotalPlayed = 0;
+      int[] playerHandPlayed = new int[4];
+      int playerDeckPlayed = 0;
+      int computerTotalPlayed = 0;
+      int[] computerHandPlayed = new int[4]; 
       int totalPlayed;
-     int computerTotal;
+      int computerTotal;
       Cards[] shuffledCards = new Cards[40];
-       Cards[] computerHand = new Cards[4];
-        Cards[] playerHand = new Cards[4];
-         Scanner sc = new Scanner(System.in);
-        int playerTotal;
+      Cards[] computerHand = new Cards[4];
+      Cards[] playerHand = new Cards[4];
+      Scanner sc = new Scanner(System.in);
+      int playerTotal;
 
     public int[] getPlayerHandPlayed() {
         return playerHandPlayed;
@@ -95,21 +94,21 @@ public class  GameFunctions{
     } 
     public void startText(){
            System.out.println("");
-            System.out.println("*************************");
-             System.out.println("*       BLUEJACK       *");
-              System.out.println("*************************");
-               System.out.println("ENTER 1 TO PLAY THE GAME");
-                System.out.println("ENTER 2 TO END THIS GAME");
-                 System.out.println("*************************");
-                  System.out.print("Enter your choice: ");
+           System.out.println("*************************");
+           System.out.println("*       BLUEJACK       *");
+           System.out.println("*************************");
+           System.out.println("ENTER 1 TO PLAY THE GAME");
+           System.out.println("ENTER 2 TO END THIS GAME");
+           System.out.println("*************************");
+           System.out.print("Enter your choice: ");
     }
     public Cards[] gamedeckCreator(Cards[][] gameDeck){
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j <10 ; j++) {
                     if(i==0) gameDeck[i][j] = new Cards( j+1, "B");
-                     if(i==1) gameDeck[i][j] = new Cards( j+1, "Y");
-                      if(i==2) gameDeck[i][j] = new Cards( j+1, "R");
-                       if(i==3) gameDeck[i][j] = new Cards( j+1, "G");
+                    if(i==1) gameDeck[i][j] = new Cards( j+1, "Y");
+                    if(i==2) gameDeck[i][j] = new Cards( j+1, "R");
+                    if(i==3) gameDeck[i][j] = new Cards( j+1, "G");
                 }
             }
             return shuffleTheCards(gameDeck);
@@ -117,21 +116,21 @@ public class  GameFunctions{
     public Cards[] shuffleTheCards(Cards[][]gameDeck)
     {
         
-        Cards[] shuffledCards = new Cards[40];
+         Cards[] shuffledCards = new Cards[40];
          int color = 0;
-          int number = 0;
+         int number = 0;
            for (int i = 0; i < 40; i++) {
             
             color = random.nextInt(4);
-             number = random.nextInt(10);
+            number = random.nextInt(10);
               boolean toNextNumber = true;
             while (toNextNumber) {
                 for (int j = 0; j < i+1; j++) {
                     if(shuffledCards[j]==gameDeck[color][number])
                     {
-                        color = random.nextInt(4);
+                         color = random.nextInt(4);
                          number = random.nextInt(10);
-                          toNextNumber = true;
+                         toNextNumber = true;
                      break;
                     }
                     else
@@ -149,17 +148,17 @@ public class  GameFunctions{
     }
     public Cards[] secondStepDeckGenerator(Cards[] deck){
         for (int i = 5; i < 8; i++) {
-            String color = "";
-             int colorI = random.nextInt(4);//0 B 1 Y 2 R 3 G
-              int numberI = random.nextInt(6)+1;
+               String color = "";
+               int colorI = random.nextInt(4);//0 B 1 Y 2 R 3 G
+               int numberI = random.nextInt(6)+1;
                int signI = random.nextInt(2);
             
-            if(colorI ==0) color = "B";
+             if(colorI ==0) color = "B";
              if(colorI ==1) color = "Y";
-              if(colorI ==2) color = "R";
-               if(colorI ==3) color = "G";
-                if(signI==0)deck[i] = new Cards( +numberI, color);
-                 if(signI==1)deck[i] = new Cards( -numberI, color);
+             if(colorI ==2) color = "R";
+             if(colorI ==3) color = "G";
+             if(signI==0)deck[i] = new Cards( +numberI, color);
+             if(signI==1)deck[i] = new Cards( -numberI, color);
             
             
         }
@@ -173,16 +172,16 @@ public class  GameFunctions{
             if(chance<80){
                 
             String color = "";
-             int colorI = random.nextInt(4);//0 B 1 Y 2 R 3 G
-              int numberI = random.nextInt(6)+1;
-               int signI = random.nextInt(2);
+            int colorI = random.nextInt(4);//0 B 1 Y 2 R 3 G
+            int numberI = random.nextInt(6)+1;
+            int signI = random.nextInt(2);
             
             if(colorI ==0) color = "B";
-             if(colorI ==1) color = "Y";
-              if(colorI ==2) color = "R";
-               if(colorI ==3) color = "G";
+            if(colorI ==1) color = "Y";
+            if(colorI ==2) color = "R";
+            if(colorI ==3) color = "G";
  
-            if(signI==0)deck[i] = new Cards( numberI, color);
+             if(signI==0)deck[i] = new Cards( numberI, color);
              if(signI==1)deck[i] = new Cards( -numberI, color);
     
             }else{
@@ -190,12 +189,12 @@ public class  GameFunctions{
                 if(alreadyJokerSelected==false)
                 {
                     if(jokerCard==0) deck[i] = new Cards(false);
-                     if(jokerCard==1) deck[i] = new Cards(true);
-                      alreadyJokerSelected = true;
+                    if(jokerCard==1) deck[i] = new Cards(true);
+                    alreadyJokerSelected = true;
                 }else
                 {
                     if(jokerCard==0) deck[i] = new Cards(true);
-                     if(jokerCard==1) deck[i] = new Cards(false);
+                    if(jokerCard==1) deck[i] = new Cards(false);
                 }
                 
             }
@@ -214,7 +213,7 @@ public class  GameFunctions{
             
             
             number = random.nextInt(10);
-             boolean toNextNumber = true;
+            boolean toNextNumber = true;
             while (toNextNumber) {
                 for (int j = 0; j < i+1; j++) {
                     if(handDeck[j]==Deck[number])
@@ -238,26 +237,26 @@ public class  GameFunctions{
        if(playerDeck)
        {
            for (int i = 0; i < 5; i++) {
-            deck[i] = shuffledDeck[39-i];
+             deck[i] = shuffledDeck[39-i];
         }
        }else
        {
            for (int i = 0; i < 5; i++) {
-            deck[i] = shuffledDeck[i];
+             deck[i] = shuffledDeck[i];
         }
        }
        return secondStepDeckGenerator(deck);
     }
     public void playText(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,boolean show){
-    this.shuffledCards = shuffledCards;
-     this.computerHand = computerHand;
+      this.shuffledCards = shuffledCards;
+      this.computerHand = computerHand;
       this.playerHand = playerHand;
-       playerTotal = 0;  
-        computerTotal = 0;
-        String[] playerHandStrings = new String[4];
+      playerTotal = 0;  
+      computerTotal = 0;
+         String[] playerHandStrings = new String[4];
          String[] computerHandStrings = new String[4];
-          String[] computerBoard = new String[9];
-           String[] playerBoard = new String[9];
+         String[] computerBoard = new String[9];
+         String[] playerBoard = new String[9];
         
         for (int i = 0; i < 4; i++) {
             if(1==playerHandPlayed[i])
@@ -284,7 +283,7 @@ public class  GameFunctions{
             if(i<computerTotalPlayed)
             {
                 computerBoard[i] = computerBoardCards[i].getCard();
-                 computerTotal += computerBoardCards[i].getCardNumber();
+                computerTotal += computerBoardCards[i].getCardNumber();
             }
             else
             {
@@ -295,7 +294,7 @@ public class  GameFunctions{
             if(i<playerTotalPlayed)
             {
                 playerBoard[i] = playerBoardCards[i].getCard();
-                 playerTotal += playerBoardCards[i].getCardNumber();
+                playerTotal += playerBoardCards[i].getCardNumber();
             }
             else
             {
@@ -304,19 +303,19 @@ public class  GameFunctions{
         }
             if(show)
             {
-            System.out.println("");
-             System.out.println("                  -------------------------------");
+              System.out.println("");
+              System.out.println("                  -------------------------------");
               System.out.println("Computer's hand-->"+"    "+computerHandStrings[0]+"    "+computerHandStrings[1]+"    "+computerHandStrings[2]+"    "+computerHandStrings[3]);
-               System.out.println("                  -------------------------------");
-                System.out.println("Computer's Board->"+"    "+computerBoard[0]+"    "+computerBoard[1]+"    "+computerBoard[2]+"    "+computerBoard[3]+"    "+computerBoard[4]+"    "+computerBoard[5]+"    "+computerBoard[6]+"    "+computerBoard[7]+"    "+computerBoard[8]);
-                 System.out.println("                  -------------------------------");
-                  System.out.println("Player's Board--->"+"    "+playerBoard[0]+"    "+playerBoard[1]+"    "+playerBoard[2]+"    "+playerBoard[3]+"    "+playerBoard[4]+"    "+playerBoard[5]+"    "+playerBoard[6]+"    "+playerBoard[7]+"    "+playerBoard[8]);
-                   System.out.println("                  -------------------------------");
-                    System.out.println("Player's hand---->"+"    "+playerHandStrings[0]+"    "+playerHandStrings[1]+"    "+playerHandStrings[2]+"    "+playerHandStrings[3]);
-                     System.out.println("                  -------------------------------");
-                      System.out.println("");
-                       System.out.println("your deck: "+playerTotal);
-                        System.out.println("Computer deck: "+ computerTotal);
+              System.out.println("                  -------------------------------");
+              System.out.println("Computer's Board->"+"    "+computerBoard[0]+"    "+computerBoard[1]+"    "+computerBoard[2]+"    "+computerBoard[3]+"    "+computerBoard[4]+"    "+computerBoard[5]+"    "+computerBoard[6]+"    "+computerBoard[7]+"    "+computerBoard[8]);
+              System.out.println("                  -------------------------------");
+              System.out.println("Player's Board--->"+"    "+playerBoard[0]+"    "+playerBoard[1]+"    "+playerBoard[2]+"    "+playerBoard[3]+"    "+playerBoard[4]+"    "+playerBoard[5]+"    "+playerBoard[6]+"    "+playerBoard[7]+"    "+playerBoard[8]);
+              System.out.println("                  -------------------------------");
+              System.out.println("Player's hand---->"+"    "+playerHandStrings[0]+"    "+playerHandStrings[1]+"    "+playerHandStrings[2]+"    "+playerHandStrings[3]);
+              System.out.println("                  -------------------------------");
+              System.out.println("");
+              System.out.println("your deck: "+playerTotal);
+              System.out.println("Computer deck: "+ computerTotal);
             }
     }
     public void startTurn()
@@ -324,14 +323,13 @@ public class  GameFunctions{
          int choice;
           while (true) {
             try {
-                System.out.println("");
-                 System.out.println("1) Type 1 for stand");
-                  System.out.println("2) Type 2 for pick cards");
-                   System.out.print("Enter your choice: ");
-                    choice = sc.nextInt();
-                     if (choice != 1 && choice != 2) {
-                      System.out.println("You entered a value other than 1 or 2. Try again.");
-                       continue; 
+                 System.out.println("");
+                 System.out.println("1) Type 1 for pick card from game deck");
+                 System.out.print("Enter your choice: ");
+                 choice = sc.nextInt();
+                     if (choice != 1) {
+                        System.out.println("You entered a value other than 1. Try again.");
+                         continue; 
                 }
                 break; 
             } catch (InputMismatchException e) {
@@ -341,24 +339,18 @@ public class  GameFunctions{
             }
         }
           
+    
     if(choice==1)
     {
-        System.out.println("");
-         System.out.println("You chosed to stand");
-          System.out.println("");
-           stand = false;
-    }
-    if(choice==2)
-    {
-        System.out.println("");
+         System.out.println("");
          System.out.println("You picked card from game deck");
-          System.out.println("");
-           playerBoardCards[playerTotalPlayed] = shuffledCards[totalPlayed];
-            totalPlayed++;
-             playerDeckPlayed++;
-              playerTotalPlayed++; 
-               playText(shuffledCards, playerHand, computerHand,true);
-                thirdStep();
+         System.out.println("");
+         playerBoardCards[playerTotalPlayed] = shuffledCards[totalPlayed];
+         totalPlayed++;
+         playerDeckPlayed++;
+         playerTotalPlayed++; 
+         playText(shuffledCards, playerHand, computerHand,true);
+         thirdStep();
     }
      }
     public void thirdStep()
@@ -367,11 +359,11 @@ public class  GameFunctions{
         while (true) {
             try {
                  System.out.println("");
-                  System.out.println("1) Type 1 for end turn");
-                   System.out.println("2) Type 2 for pick cards from your hand");
-                    System.out.println("3) Type 3 for stand");
-                    System.out.print("Enter your choice: ");
-                choice = sc.nextInt();
+                 System.out.println("1) Type 1 for end turn");
+                 System.out.println("2) Type 2 for pick cards from your hand");
+                 System.out.println("3) Type 3 for stand");
+                 System.out.print("Enter your choice: ");
+                 choice = sc.nextInt();
                  if (choice != 1 && choice != 2&&choice != 3) {
                     System.out.println("You entered a value other than 1,2 or 3. Try again.");
                     continue; 
@@ -386,9 +378,9 @@ public class  GameFunctions{
     if(choice==1)
     {   
        System.out.println("");
-        System.out.println("You chosed to end the turn");
-         System.out.println("");
-      playText(shuffledCards, playerHand, computerHand,true);
+       System.out.println("You chosed to end the turn");
+       System.out.println("");
+       playText(shuffledCards, playerHand, computerHand,true);
     }
     if(choice==2)
     {
@@ -396,10 +388,19 @@ public class  GameFunctions{
     }
     if(choice==3)
     {
-      System.out.println("");
-         System.out.println("You chosed to stand");
-          System.out.println("");
-           stand = false;
+       if(playerTotalPlayed==0)
+        {
+            System.out.println("");
+            System.out.println("You can not stand in first turn");
+            System.out.println("");
+             thirdStep();
+        }else
+        {
+            System.out.println("");
+            System.out.println("You chosed to stand");
+            System.out.println("");
+            stand = false;
+        }
     }
     }
     public void pickAgain()
@@ -408,9 +409,9 @@ public class  GameFunctions{
       while (true) {
             try {
                 System.out.println("");
-                 System.out.println("Please enter which row of cards you would like to choose");
-                  System.out.print("Enter your choice: ");
-                   choice = sc.nextInt();
+                System.out.println("Please enter which row of cards you would like to choose");
+                System.out.print("Enter your choice: ");
+                choice = sc.nextInt();
                      if (choice<1||choice>4) {
                        System.out.println("You entered unvalid number or you selected card which already selected pls try again");
                        continue;
@@ -418,8 +419,8 @@ public class  GameFunctions{
                      if(playerHandPlayed[choice-1]==1)
                      {
                       System.out.println("");
-                       System.out.println("You entered unvalid number or you selected card which already selected pls try again");
-                        System.out.println("");
+                      System.out.println("You entered unvalid number or you selected card which already selected pls try again");
+                      System.out.println("");
                         continue;
                      } 
                 break; 
@@ -433,34 +434,66 @@ public class  GameFunctions{
      {
              if(playerHand[choice-1].isX2()==true)
          {
-             System.out.println("");
-              System.out.println("YOU USED X2");
                System.out.println("");
-                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
-                 playerHandPlayed[choice-1] = 1;
-                  playText(shuffledCards, playerHand, computerHand,true);
+               System.out.println("YOU USED X2");
+               System.out.println("");
+               playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
+               playerHandPlayed[choice-1] = 1;
+               playText(shuffledCards, playerHand, computerHand,true);
          }else
          {
-             System.out.println("");
+              System.out.println("");
               System.out.println("YOU USED +/-");
-               System.out.println("");
-                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
-                 playerHandPlayed[choice-1] = 1;
-                  playText(shuffledCards, playerHand, computerHand,true); 
+              System.out.println("");
+              playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
+              playerHandPlayed[choice-1] = 1;
+               playText(shuffledCards, playerHand, computerHand,true); 
           }
      }
      else
      {
-         System.out.println("");
+          System.out.println("");
           System.out.println("You picked card from your hand");
-           System.out.println("");
-            playerBoardCards[playerTotalPlayed] = playerHand[choice-1];
-             playerHandPlayed[choice-1] = 1;
-               playerDeckPlayed++;
-                playerTotalPlayed++;
-                 playText(shuffledCards, playerHand, computerHand,true);
+          System.out.println("");
+          playerBoardCards[playerTotalPlayed] = playerHand[choice-1];
+          playerHandPlayed[choice-1] = 1;
+          playerDeckPlayed++;
+          playerTotalPlayed++;
+          playText(shuffledCards, playerHand, computerHand,true);
                   
      }
+        while (true) {
+            try {
+                 System.out.println("");
+                 System.out.println("1) Type 1 for end turn");
+                 System.out.println("2) Type 2 for stand");
+                 System.out.print("Enter your choice: ");
+                 choice = sc.nextInt();
+                 if (choice != 1 && choice != 2&&choice != 3) {
+                    System.out.println("You entered a value other than 1,2  Try again.");
+                    continue; 
+                }
+                break; 
+            } catch (InputMismatchException e) {
+                System.out.println("");
+                System.out.println("You have entered unvalid value. Please enter an integer value.");
+                sc.nextLine(); 
+            }
+        }
+    if(choice==1)
+    {   
+       System.out.println("");
+       System.out.println("You chosed to end the turn");
+       System.out.println("");
+       playText(shuffledCards, playerHand, computerHand,true);
+    }
+    if(choice==2)
+    {
+            System.out.println("");
+            System.out.println("You chosed to stand");
+            System.out.println("");
+            stand = false;
+    }
     }
     public void setstand(boolean stand)
     {
@@ -472,19 +505,11 @@ public class  GameFunctions{
     }
     public void startToThink()
     {
-         if(computerTotal<=20&&computerTotal>=17)
-    {
-      computerstand = false;
-    }
-       
-           playText(shuffledCards, playerHand, computerHand,false);
-           if(computerTotal<18)
-    {
-      computerBoardCards[computerTotalPlayed] = shuffledCards[totalPlayed];
+       playText(shuffledCards, playerHand, computerHand,false);
+       computerBoardCards[computerTotalPlayed] = shuffledCards[totalPlayed];
        totalPlayed++;
-         computerTotalPlayed++;    
-         playText(shuffledCards, playerHand, computerHand,false);
-    }
+       computerTotalPlayed++;    
+       playText(shuffledCards, playerHand, computerHand,false);
            
             if(computerTotal<=20&&computerTotal>=17)
     {
@@ -505,8 +530,8 @@ public class  GameFunctions{
         if(whichHandCard!=999)
         {
           computerBoardCards[computerTotalPlayed] = computerHand[whichHandCard];
-           computerHandPlayed[whichHandCard] = 1;
-              computerTotalPlayed++;
+          computerHandPlayed[whichHandCard] = 1;
+          computerTotalPlayed++;
         }
         else
         {
@@ -519,7 +544,7 @@ public class  GameFunctions{
             if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0)
             {
               computerBoardCards[computerTotalPlayed] = computerHand[i];
-           computerHandPlayed[i] = 1;
+              computerHandPlayed[i] = 1;
               computerTotalPlayed++;
               computerstand = false;
                break;
