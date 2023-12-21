@@ -89,7 +89,13 @@ public class Main {
               playerHandPlayed = gf.getPlayerHandPlayed();
               
             }
-            if(totalPlayed==40) break;
+            if(totalPlayed==35)
+            {
+                System.out.println("");
+                System.out.println("Game Deck Cards Are Finished");
+                System.out.println("");
+                break;
+            }
             if(gf.isComputerstand())
             {
               gf.startToThink();
@@ -103,7 +109,13 @@ public class Main {
             }
               totalPlayed= gf.getTotalPlayed();
               computerHandPlayed = gf.getComputerHandPlayed();
-               if(totalPlayed==40) break;
+               if(totalPlayed==35)
+            {
+                System.out.println("");
+                System.out.println("Game Deck Cards Are Finished");
+                System.out.println("");
+                break;
+            }
   
         }
             
