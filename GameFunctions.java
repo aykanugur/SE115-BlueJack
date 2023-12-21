@@ -409,13 +409,19 @@ public class  GameFunctions{
       while (true) {
             try {
                 System.out.println("");
-                System.out.println("Please enter which row of cards you would like to choose");
+                System.out.println("1)Please enter which row of cards you would like to choose card from hand");
+                System.out.println("2)press 0 to go back to previous selection menu");
                 System.out.print("Enter your choice: ");
                 choice = sc.nextInt();
-                     if (choice<1||choice>4) {
+                     if (choice<0||choice>4) {
                        System.out.println("You entered unvalid number or you selected card which already selected pls try again");
                        continue;
                 }
+                     if(choice==0)
+                     {
+                     thirdStep();
+                     return;
+                     }
                      if(playerHandPlayed[choice-1]==1)
                      {
                       System.out.println("");
@@ -430,6 +436,9 @@ public class  GameFunctions{
                 sc.nextLine(); 
             }
         }
+     
+      
+      
      if(playerHand[choice-1].isJoker()==true)
      {
              if(playerHand[choice-1].isX2()==true)

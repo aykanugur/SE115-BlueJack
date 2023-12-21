@@ -124,33 +124,42 @@ public class Main {
            
           if(gf.playerTotal==20&&gf.computerTotal==20)
           {
-               int blueCards = 0;
-                   for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
+             int computerBlueCards = 0;
+             int playerBlueCards = 0;
+              
+              for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
                     
-                      if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                      if(gf.playerBoardCards[i].getCardColor().equals("B")) playerBlueCards++;
                 
-            }
-                   if(blueCards==gf.getPlayerTotalPlayed())
-                     {
-                         recordGame(user+": ", 3, "COMPUTER: ", computerWins);
-                         return true;
-                     } 
-                    blueCards = 0;
-                   for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
+                }
+              for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                     
-                      if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                      if(gf.computerBoardCards[i].getCardColor().equals("B")) computerBlueCards++;
                 
-            }
-                   if(blueCards==gf.getComputerTotalPlayed())
-                     {
-                         recordGame(user+": ", playerWins, "COMPUTER: ", 3);
-                         return false;
-                     }
+            } 
+              if(playerBlueCards==gf.getPlayerTotalPlayed()&&computerBlueCards==gf.getComputerTotalPlayed())
+              {
             System.out.println("");
             System.out.println("TIE");
             System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
             return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
-                   
+              }else
+              {
+              if(playerBlueCards==gf.getPlayerTotalPlayed())
+                     {
+                         recordGame(user+": ", 3, "COMPUTER: ", computerWins);
+                         return true;
+                     } 
+                    if(computerBlueCards==gf.getComputerTotalPlayed())
+                     {
+                         recordGame(user+": ", playerWins, "COMPUTER: ", 3);
+                         return false;
+                     }
+              }   
+            System.out.println("");
+            System.out.println("TIE");
+            System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
+            return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user); 
           }
           else
           {
