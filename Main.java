@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
 public class Main {
-    
+    static boolean isTie = false;
     public static void main(String[] args) {
          Scanner sc = new Scanner(System.in);
          Random random = new Random();
@@ -52,9 +52,17 @@ public class Main {
               whoWon = play(shuffledCards, playerHand, computerHand,0,0,5,gf.getComputerHandPlayed(),gf.getPlayerHandPlayed(),user);
             if(whoWon)
             {
+               if(isTie)
+              {
                System.out.println("");
+               System.out.println("GAME IS TIE");
+               choice = 2;
+              }else
+               {
+                System.out.println("");
                System.out.println(user+" won");
                choice = 2;
+             }
             } 
             else
             {
@@ -94,7 +102,24 @@ public class Main {
                 System.out.println("");
                 System.out.println("Game Deck Cards Are Finished");
                 System.out.println("");
-                break;
+                if(playerWins==computerWins)
+              {
+                recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
+                isTie = true;
+                 return true;
+                  }else
+                 {
+                   if(playerWins>computerWins)
+                  {
+                    recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
+                     return true;
+                  }
+                    if(playerWins<computerWins)
+                    {
+                     recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
+                      return false;
+                       }
+                   }
             }
             if(gf.isComputerstand())
             {
@@ -109,12 +134,29 @@ public class Main {
             }
               totalPlayed= gf.getTotalPlayed();
               computerHandPlayed = gf.getComputerHandPlayed();
-               if(totalPlayed==35)
+             if(totalPlayed==35)
             {
                 System.out.println("");
                 System.out.println("Game Deck Cards Are Finished");
                 System.out.println("");
-                break;
+                if(playerWins==computerWins)
+              {
+                recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
+                isTie = false;
+                 return true;
+                  }else
+                 {
+                   if(playerWins>computerWins)
+                  {
+                    recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
+                     return true;
+                  }
+                    if(playerWins<computerWins)
+                    {
+                     recordGame(user+": ", playerWins, "COMPUTER: ", computerWins);
+                      return false;
+                       }
+                   }
             }
   
         }
@@ -302,9 +344,13 @@ public class Main {
               
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
         } // No winner according to the rules tie
-          System.out.println("");
-          System.out.println("TIE");
-          System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
+         if(gf.playerTotal==gf.computerTotal)
+         {
+           System.out.println("");
+           System.out.println("TIE");
+           System.out.println(user+": "+playerWins+" "+"COMPUTER: "+computerWins);
+           
+         }
            return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
         
                   }
