@@ -78,10 +78,11 @@ public class Main {
     }
     public static boolean play(Cards[] shuffledCards,Cards[] playerHand,Cards[] computerHand,int playerWins,int computerWins,int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed,String user){
         
-        
-          GameFunctions gf = new GameFunctions(totalPlayed,computerHandPlayed,playerHandPlayed);
+         
+          GameFunctions gf = new GameFunctions(totalPlayed,computerHandPlayed,playerHandPlayed,shuffledCards,playerHand,computerHand);
+          shuffledCards = gf.getShuffledCards();
           gf.playText(shuffledCards,playerHand,computerHand,true);//start of player turn
-        
+          
  
             while ((gf.getstand()||gf.isComputerstand())&&gf.getComputerTotal()<=20&&gf.playerTotal<=20&&gf.computerTotalPlayed<=9&&gf.playerTotalPlayed<=9) {            
             if(gf.getstand())// oyuncu

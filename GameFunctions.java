@@ -19,6 +19,14 @@ public class  GameFunctions{
       Scanner sc = new Scanner(System.in);
       int playerTotal;
 
+    public Cards[] getShuffledCards() {
+        return shuffledCards;
+    }
+
+    public void setShuffledCards(Cards[] shuffledCards) {
+        this.shuffledCards = shuffledCards;
+    }
+
     public int[] getPlayerHandPlayed() {
         return playerHandPlayed;
     }
@@ -37,10 +45,13 @@ public class  GameFunctions{
        boolean stand = true;
       boolean computerstand = true;
       
-      public GameFunctions(int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed) {
+      public GameFunctions(int totalPlayed,int[] computerHandPlayed,int[]playerHandPlayed,Cards[] shuff,Cards[] playerHand,Cards[] computerHand) {
         this.totalPlayed = totalPlayed;
         this.computerHandPlayed = computerHandPlayed;
         this.playerHandPlayed = playerHandPlayed;
+        this.shuffledCards = shuff;
+        this.playerHand = playerHand;
+        this.computerHand= computerHand;
     }
       public GameFunctions(int totalPlayed ) {
         this.totalPlayed = totalPlayed;
@@ -261,7 +272,7 @@ public class  GameFunctions{
         for (int i = 0; i < 4; i++) {
             if(1==playerHandPlayed[i])
             {
-                 playerHandStrings[i] = "***";
+                 playerHandStrings[i] = "   ";
             }
             else
             {
@@ -271,8 +282,8 @@ public class  GameFunctions{
         for (int i = 0; i < 4; i++) {
             if(1==computerHandPlayed[i])
             {
+                computerHandStrings[i] = "   ";
                 
-                computerHandStrings[i] = computerHand[i].getCard();
             }
             else
             {
@@ -346,6 +357,7 @@ public class  GameFunctions{
          System.out.println("You picked card from game deck");
          System.out.println("");
          playerBoardCards[playerTotalPlayed] = shuffledCards[totalPlayed];
+         shuffledCards[totalPlayed] = null;
          totalPlayed++;
          playerDeckPlayed++;
          playerTotalPlayed++; 
@@ -447,6 +459,7 @@ public class  GameFunctions{
                System.out.println("YOU USED X2");
                System.out.println("");
                playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*2);
+               playerHand[choice-1]=null;
                playerHandPlayed[choice-1] = 1;
                playText(shuffledCards, playerHand, computerHand,true);
          }else
@@ -456,6 +469,7 @@ public class  GameFunctions{
               System.out.println("");
               playerBoardCards[playerTotalPlayed-1].setCardNumber(playerBoardCards[playerTotalPlayed-1].getCardNumber()*-1);
               playerHandPlayed[choice-1] = 1;
+              playerHand[choice-1]=null;
                playText(shuffledCards, playerHand, computerHand,true); 
           }
      }
@@ -467,6 +481,7 @@ public class  GameFunctions{
           playerBoardCards[playerTotalPlayed] = playerHand[choice-1];
           playerHandPlayed[choice-1] = 1;
           playerDeckPlayed++;
+          playerHand[choice-1]=null;
           playerTotalPlayed++;
           playText(shuffledCards, playerHand, computerHand,true);
                   
@@ -516,8 +531,9 @@ public class  GameFunctions{
     {
        playText(shuffledCards, playerHand, computerHand,false);
        computerBoardCards[computerTotalPlayed] = shuffledCards[totalPlayed];
+       shuffledCards[totalPlayed] = null;
        totalPlayed++;
-       computerTotalPlayed++;    
+       computerTotalPlayed++; 
        playText(shuffledCards, playerHand, computerHand,false);
            
             if(computerTotal<=20&&computerTotal>=17)
@@ -529,18 +545,26 @@ public class  GameFunctions{
        int min= 999;
         int whichHandCard = 999;
          for (int i = 0; i < 4; i++) {
-            if((computerTotal+computerHand[i].getCardNumber())<=20&&computerHandPlayed[i]==0&&computerHand[i].isJoker()==false)
+             if(computerHand[i]!=null)
+             {
+                 if((computerTotal+computerHand[i].getCardNumber())<=20&&computerHandPlayed[i]==0&&computerHand[i].isJoker()==false&&computerHand[i]!=null)
             {
-            if(computerHand[i].getCardNumber()<min)
+            if(computerHand[i].getCardNumber()<min&&computerHand[i]!=null)
                 min = computerHand[i].getCardNumber();
                  whichHandCard = i;
             }
+             }
+            
         }
-        if(whichHandCard!=999)
+        if(whichHandCard!=999&&computerHand[whichHandCard]!=null)
         {
-          computerBoardCards[computerTotalPlayed] = computerHand[whichHandCard];
-          computerHandPlayed[whichHandCard] = 1;
-          computerTotalPlayed++;
+          if(computerHand[whichHandCard]!=null)
+          {
+              computerBoardCards[computerTotalPlayed] = computerHand[whichHandCard];
+              computerHand[whichHandCard] = null;
+              computerHandPlayed[whichHandCard] = 1;
+              computerTotalPlayed++;
+          }
         }
         else
         {
@@ -550,13 +574,17 @@ public class  GameFunctions{
            {
               for (int i = 0; i < 4; i++) {
             
-            if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0)
+            if(computerHand[i]!=null)
+            {
+                if((20-computerTotal)==computerHand[i].getCardNumber()&&computerHand[i].isJoker()==false&&computerHand[i].getCardNumber()>0&&computerHand[i]!=null)
             {
               computerBoardCards[computerTotalPlayed] = computerHand[i];
               computerHandPlayed[i] = 1;
               computerTotalPlayed++;
               computerstand = false;
+              computerHand[i] = null;
                break;
+            }
             }
               } 
            }
