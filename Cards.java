@@ -1,10 +1,10 @@
 
 public class Cards {
     
-    int cardNumber;
-     String cardColor;
-      boolean x2;
-       boolean joker = false;
+    private int cardNumber;
+     private String cardColor;
+      private boolean x2;
+       private boolean joker = false;
     
 
     public Cards(int cardNumber, String cardColor) {

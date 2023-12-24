@@ -3,21 +3,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class  GameFunctions{
-      Random random = new Random();
-      Cards[] playerBoardCards = new Cards[9];
-      Cards[] computerBoardCards = new Cards[9];
-      int playerTotalPlayed = 0;
-      int[] playerHandPlayed = new int[4];
-      int playerDeckPlayed = 0;
-      int computerTotalPlayed = 0;
-      int[] computerHandPlayed = new int[4]; 
-      int totalPlayed;
-      int computerTotal;
-      Cards[] shuffledCards = new Cards[40];
-      Cards[] computerHand = new Cards[4];
-      Cards[] playerHand = new Cards[4];
-      Scanner sc = new Scanner(System.in);
-      int playerTotal;
+      private Random random = new Random();
+      private Cards[] playerBoardCards = new Cards[9];
+      private Cards[] computerBoardCards = new Cards[9];
+      private int playerTotalPlayed = 0;
+      private int[] playerHandPlayed = new int[4];
+      private int playerDeckPlayed = 0;
+      private int computerTotalPlayed = 0;
+      private int[] computerHandPlayed = new int[4]; 
+      private int totalPlayed;
+      private int computerTotal;
+      private Cards[] shuffledCards = new Cards[40];
+      private Cards[] computerHand = new Cards[4];
+      private Cards[] playerHand = new Cards[4];
+      private Scanner sc = new Scanner(System.in);
+     private int playerTotal;
 
     public Cards[] getShuffledCards() {
         return shuffledCards;
@@ -100,7 +100,7 @@ public class  GameFunctions{
 
     public Cards[] startCreateCards()
     {
-     Cards[][] gameDeck = new Cards[4][10];
+      Cards[][] gameDeck = new Cards[4][10];
       return gamedeckCreator(gameDeck);
     } 
     public void startText(){
@@ -239,6 +239,7 @@ public class  GameFunctions{
                 }
             }
             handDeck[i] = Deck[number];
+            Deck[number] = null;
         }
         return handDeck;
     }
@@ -249,11 +250,13 @@ public class  GameFunctions{
        {
            for (int i = 0; i < 5; i++) {
              deck[i] = shuffledDeck[39-i];
+             shuffledDeck[39-i] = null;
         }
        }else
        {
            for (int i = 0; i < 5; i++) {
              deck[i] = shuffledDeck[i];
+             shuffledDeck[i] = null;
         }
        }
        return secondStepDeckGenerator(deck);
@@ -493,7 +496,7 @@ public class  GameFunctions{
                  System.out.println("2) Type 2 for stand");
                  System.out.print("Enter your choice: ");
                  choice = sc.nextInt();
-                 if (choice != 1 && choice != 2&&choice != 3) {
+                 if (choice != 1 && choice != 2) {
                     System.out.println("You entered a value other than 1,2  Try again.");
                     continue; 
                 }

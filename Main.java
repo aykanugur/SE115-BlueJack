@@ -84,7 +84,7 @@ public class Main {
           gf.playText(shuffledCards,playerHand,computerHand,true);//start of player turn
           
  
-            while ((gf.getstand()||gf.isComputerstand())&&gf.getComputerTotal()<=20&&gf.playerTotal<=20&&gf.computerTotalPlayed<=9&&gf.playerTotalPlayed<=9) {            
+            while ((gf.getstand()||gf.isComputerstand())&&gf.getComputerTotal()<=20&&gf.getPlayerTotal()<=20&&gf.getComputerTotalPlayed()<=9&&gf.getPlayerTotalPlayed()<=9) {            
             if(gf.getstand())// oyuncu
             {
               gf.startTurn();
@@ -165,19 +165,19 @@ public class Main {
             gf.playText(shuffledCards, playerHand, computerHand,true);
             
            
-          if(gf.playerTotal==20&&gf.computerTotal==20)
+          if(gf.getPlayerTotal()==20&&gf.getComputerTotal()==20)
           {
              int computerBlueCards = 0;
              int playerBlueCards = 0;
               
               for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
                     
-                      if(gf.playerBoardCards[i].getCardColor().equals("B")) playerBlueCards++;
+                      if(gf.getPlayerBoardCards()[i].getCardColor().equals("B")) playerBlueCards++;
                 
                 }
               for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                     
-                      if(gf.computerBoardCards[i].getCardColor().equals("B")) computerBlueCards++;
+                      if(gf.getComputerBoardCards()[i].getCardColor().equals("B")) computerBlueCards++;
                 
             } 
               if(playerBlueCards==gf.getPlayerTotalPlayed()&&computerBlueCards==gf.getComputerTotalPlayed())
@@ -206,7 +206,7 @@ public class Main {
           }
           else
           {
-              if(gf.playerTotal==20)
+              if(gf.getPlayerTotal()==20)
               {
                     playerWins++;
                     System.out.println("");
@@ -220,7 +220,7 @@ public class Main {
                      int blueCards = 0;
                    for (int i = 0; i < gf.getPlayerTotalPlayed(); i++) {
                     
-                      if(gf.playerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                      if(gf.getPlayerBoardCards()[i].getCardColor().equals("B")) blueCards++;
                 
             }
                    if(blueCards==gf.getPlayerTotalPlayed())
@@ -233,7 +233,7 @@ public class Main {
               }
               else
               {
-                  if(gf.computerTotal==20)
+                  if(gf.getComputerTotal()==20)
                   {
                       computerWins++;
                       System.out.println("");
@@ -247,7 +247,7 @@ public class Main {
                          int blueCards = 0;
                    for (int i = 0; i < gf.getComputerTotalPlayed(); i++) {
                     
-                      if(gf.computerBoardCards[i].getCardColor().equals("B")) blueCards++;
+                      if(gf.getComputerBoardCards()[i].getCardColor().equals("B")) blueCards++;
                 
             }
                    if(blueCards==gf.getComputerTotalPlayed())
@@ -260,8 +260,8 @@ public class Main {
                   }
                   else
                   {
-                    boolean player1FullBoard = gf.playerTotalPlayed == 9 && gf.getPlayerTotal() <= 20;
-                    boolean player2FullBoard = gf.computerTotalPlayed == 9 && gf.getComputerTotal() <= 20;
+                    boolean player1FullBoard = gf.getPlayerTotalPlayed() == 9 && gf.getPlayerTotal() <= 20;
+                    boolean player2FullBoard = gf.getComputerTotalPlayed() == 9 && gf.getComputerTotal() <= 20;
                    if (player1FullBoard && !player2FullBoard) {
                    // Player 1 has a full board and the score is <= 20
                      playerWins++;
@@ -290,8 +290,8 @@ public class Main {
                   
              return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
              
-        }if (gf.playerTotal <= 20 && gf.computerTotal <= 20) {
-            if (20 - gf.playerTotal < 20 - gf.computerTotal) {
+        }if (gf.getPlayerTotal() <= 20 && gf.getComputerTotal() <= 20) {
+            if (20 - gf.getPlayerTotal() < 20 - gf.getComputerTotal()) {
                   // Player 1 is closest to but not over 20
                   playerWins++;
                   System.out.println("");
@@ -304,7 +304,7 @@ public class Main {
                     } 
                      
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
-            }else if (20 - gf.computerTotal < 20 - gf.playerTotal) {
+            }else if (20 - gf.getComputerTotal() < 20 - gf.getPlayerTotal()) {
                   // Player 2 is closest to but not over 20
                   
                   computerWins++;
@@ -318,7 +318,7 @@ public class Main {
                     } 
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
             }
-        }if(gf.playerTotal>20&&gf.computerTotal<20)
+        }if(gf.getPlayerTotal()>20&&gf.getComputerTotal()<20)
         {
               computerWins++;
               System.out.println("");
@@ -331,7 +331,7 @@ public class Main {
                  } 
                   
         }
-        if(gf.playerTotal<20&&gf.computerTotal>20)
+        if(gf.getPlayerTotal()<20&&gf.getComputerTotal()>20)
         {
            playerWins++;
            System.out.println("");
@@ -345,7 +345,7 @@ public class Main {
               
                   return play(shuffledCards, playerHand, computerHand, playerWins, computerWins,totalPlayed,computerHandPlayed,playerHandPlayed,user);
         } // No winner according to the rules tie
-         if(gf.playerTotal==gf.computerTotal)
+         if(gf.getPlayerTotal()==gf.getComputerTotal())
          {
            System.out.println("");
            System.out.println("TIE");
